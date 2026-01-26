@@ -5,6 +5,11 @@
     "packageManager": "npm"
   },
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
     "language-courses": {
       "projectType": "application",
@@ -25,7 +30,10 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/material-theme.scss",
+              
+
+              "src/styles.scss"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",

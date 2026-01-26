@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use "tailwindcss";
+
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.table-overrides((
+
+  ));
+}
+
+.mat-mdc-row{
+  &:hover{
+    background-color: rgb(60, 136, 136);
+
+    cursor: pointer;
+
+
+  }
+}
