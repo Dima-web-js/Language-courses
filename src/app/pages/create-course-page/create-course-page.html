@@ -1,1 +1,131 @@
-<p>create-course-page works!</p>
+<div class="create-course-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Создание нового курса</mat-card-title>
+      <mat-card-subtitle>Заполните информацию о курсе</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field class="full-width">
+            <mat-label>Название курса</mat-label>
+            <input matInput formControlName="name" placeholder="Например: Английский для начинающих" />
+            @if (courseForm.get('name')?.hasError('required') && courseForm.get('name')?.touched) {
+              <mat-error>Название обязательно</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Категория</mat-label>
+            <mat-select formControlName="category">
+              @for (category of categories; track category.value) {
+                <mat-option [value]="category.value">{{ category.label }}</mat-option>
+              }
+            </mat-select>
+            @if (courseForm.get('category')?.hasError('required') && courseForm.get('category')?.touched) {
+              <mat-error>Выберите категорию</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Уровень</mat-label>
+            <mat-select formControlName="level">
+              @for (level of levels; track level.value) {
+                <mat-option [value]="level.value">{{ level.label }}</mat-option>
+              }
+            </mat-select>
+            @if (courseForm.get('level')?.hasError('required') && courseForm.get('level')?.touched) {
+              <mat-error>Выберите уровень</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Тема</mat-label>
+            <mat-select formControlName="theme">
+              @for (theme of themes; track theme) {
+                <mat-option [value]="theme">{{ theme }}</mat-option>
+              }
+            </mat-select>
+            @if (courseForm.get('theme')?.hasError('required') && courseForm.get('theme')?.touched) {
+              <mat-error>Выберите тему</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Язык</mat-label>
+            <mat-select formControlName="language">
+              @for (lang of languages; track lang.value) {
+                <mat-option [value]="lang.value">{{ lang.label }}</mat-option>
+              }
+            </mat-select>
+            @if (courseForm.get('language')?.hasError('required') && courseForm.get('language')?.touched) {
+              <mat-error>Выберите язык</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field class="full-width">
+            <mat-label>Описание курса</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              rows="4"
+              placeholder="Подробное описание курса"
+            ></textarea>
+            @if (courseForm.get('description')?.hasError('required') && courseForm.get('description')?.touched) {
+              <mat-error>Описание обязательно</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field class="full-width">
+            <mat-label>Цели курса (через запятую)</mat-label>
+            <textarea
+              matInput
+              formControlName="goals"
+              rows="3"
+              placeholder="Например: Освоить базовую грамматику, Научиться говорить на бытовые темы"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field class="full-width">
+            <mat-label>Программа курса</mat-label>
+            <textarea
+              matInput
+              formControlName="program"
+              rows="4"
+              placeholder="Краткое описание программы"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field class="full-width">
+            <mat-label>Уроки (название, длительность - каждый с новой строки)</mat-label>
+            <textarea
+              matInput
+              formControlName="lessons"
+              rows="5"
+              placeholder="Например:&#10;Урок 1: Введение - 15 мин&#10;Урок 2: Основы - 20 мин"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button type="button" (click)="cancel()">Отмена</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">
+            Создать курс
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

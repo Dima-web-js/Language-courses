@@ -1,1 +1,40 @@
-<p>lesson-page works!</p>
+@if (course() && lesson(); as lessonData) {
+  <div class="lesson-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ lessonData.title }}</mat-card-title>
+        <mat-card-subtitle>
+          Курс: {{ course()!.name }} | Длительность: {{ lessonData.duration }} мин
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="video-container">
+          @if (safeVideoUrl()) {
+            <iframe
+              [src]="safeVideoUrl()"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          }
+        </div>
+
+        <div class="lesson-actions">
+          <button mat-raised-button (click)="goBackToCourse()">
+            Вернуться к курсу
+          </button>
+          @if (hasNextLesson()) {
+            <button mat-raised-button color="primary" (click)="goToNextLesson()">
+              Следующий урок →
+            </button>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+} @else {
+  <div class="error-container">
+    <p>Урок не найден</p>
+    <button mat-raised-button (click)="goBackToCourse()">Вернуться к курсу</button>
+  </div>
+}

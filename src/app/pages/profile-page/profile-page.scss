@@ -1,0 +1,41 @@
+.profile-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-info {
+  margin-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+
+  .label {
+    font-weight: 500;
+    min-width: 80px;
+    color: #666;
+  }
+
+  .value {
+    font-size: 16px;
+  }
+}
+
+.teacher-chip {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+.teacher-actions {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+
+  h3 {
+    margin-bottom: 16px;
+  }
+}

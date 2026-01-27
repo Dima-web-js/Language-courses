@@ -1,1 +1,36 @@
-<p>profile-page works!</p>
+<div class="profile-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Личный кабинет</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="profile-info">
+        <div class="info-row">
+          <span class="label">Имя:</span>
+          <span class="value">{{ profile().name }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Email:</span>
+          <span class="value">{{ profile().email }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Роль:</span>
+          <mat-chip-set>
+            <mat-chip [class.teacher-chip]="profile().role === 'teacher'">
+              {{ getRoleLabel() }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </div>
+
+      @if (profile().role === 'teacher') {
+        <div class="teacher-actions">
+          <h3>Действия преподавателя</h3>
+          <button mat-raised-button color="primary" (click)="goToCreateCourse()">
+            Создать новый курс
+          </button>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>
