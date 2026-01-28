@@ -2,25 +2,25 @@
   @if (loading()) {
     <div class="loading-wrapper">
       <mat-spinner diameter="48"></mat-spinner>
-      <p>Загрузка профиля...</p>
+      <p>{{ 'Загрузка профиля...' | transloco }}</p>
     </div>
   } @else if (profile(); as profileData) {
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Личный кабинет</mat-card-title>
+        <mat-card-title>{{ 'Личный кабинет' | transloco }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="profile-info">
           <div class="info-row">
-            <span class="label">Имя:</span>
+            <span class="label">{{ 'Имя' | transloco }}:</span>
             <span class="value">{{ profileData.name }}</span>
           </div>
           <div class="info-row">
-            <span class="label">Email:</span>
+            <span class="label">{{ 'Email' | transloco }}:</span>
             <span class="value">{{ profileData.email }}</span>
           </div>
           <div class="info-row">
-            <span class="label">Роль:</span>
+            <span class="label">{{ 'Роль' | transloco }}:</span>
             <mat-chip-set>
               <mat-chip [class.teacher-chip]="profileData.role === 'teacher'">
                 {{ getRoleLabel() }}
@@ -31,23 +31,23 @@
 
         @if (profileData.role === 'teacher') {
           <div class="teacher-actions">
-            <h3>Действия преподавателя</h3>
+            <h3>{{ 'Действия преподавателя' | transloco }}</h3>
             <button mat-raised-button color="primary" (click)="goToCreateCourse()">
-              Создать новый курс
+              {{ 'Создать новый курс' | transloco }}
             </button>
           </div>
         }
 
         <div class="logout-actions">
           <button mat-stroked-button color="warn" (click)="logout()">
-            Выйти
+            {{ 'Выйти' | transloco }}
           </button>
         </div>
       </mat-card-content>
     </mat-card>
   } @else {
     <div class="error-container">
-      <p>Не удалось загрузить профиль</p>
+      <p>{{ 'Не удалось загрузить профиль' | transloco }}</p>
     </div>
   }
 </div>

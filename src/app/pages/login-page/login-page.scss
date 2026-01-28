@@ -1,9 +1,17 @@
 .login-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 60vh;
   padding: 20px;
+  position: relative;
+}
+
+.language-switcher-top {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 mat-card {

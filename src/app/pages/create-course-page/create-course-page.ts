@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { TranslocoModule } from '@jsverse/transloco';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-course-page',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
+    TranslocoModule,
   ],
   templateUrl: './create-course-page.html',
   styleUrl: './create-course-page.scss',

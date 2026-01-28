@@ -1,7 +1,7 @@
 @if (loading()) {
   <div class="loading-wrapper">
     <mat-spinner diameter="48"></mat-spinner>
-    <p>Загрузка урока...</p>
+    <p>{{ 'Загрузка урока...' | transloco }}</p>
   </div>
 } @else if (lessonContent(); as content) {
   <div class="lesson-container">
@@ -23,16 +23,16 @@
 
         <div class="lesson-actions">
           <button mat-raised-button (click)="goBackToCourse()">
-            Вернуться к курсу
+            {{ 'Вернуться к курсу' | transloco }}
           </button>
           @if (hasPreviousLesson()) {
             <button mat-raised-button (click)="goToPreviousLesson()">
-              ← Предыдущий урок
+              ← {{ 'Предыдущий урок' | transloco }}
             </button>
           }
           @if (hasNextLesson()) {
             <button mat-raised-button color="primary" (click)="goToNextLesson()">
-              Следующий урок →
+              {{ 'Следующий урок' | transloco }} →
             </button>
           }
         </div>
@@ -41,7 +41,7 @@
   </div>
 } @else {
   <div class="error-container">
-    <p>Урок не найден</p>
-    <button mat-raised-button (click)="goBackToCourse()">Вернуться к курсу</button>
+    <p>{{ 'Урок не найден' | transloco }}</p>
+    <button mat-raised-button (click)="goBackToCourse()">{{ 'Вернуться к курсу' | transloco }}</button>
   </div>
 }

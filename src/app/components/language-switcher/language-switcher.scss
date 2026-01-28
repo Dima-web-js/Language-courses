@@ -1,0 +1,8 @@
+.lang-switcher {
+  width: 140px;
+  margin-right: 16px;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}

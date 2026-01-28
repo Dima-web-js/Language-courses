@@ -9,6 +9,7 @@ import { CourseListItem, Level, LEVEL } from '../../shared/interfaces/course.mod
 import { Router } from '@angular/router';
 import { CoursesService } from '../../shared/services/courses.service';
 import { ToolbarComponent } from '../../shared/ui/toolbar/toolbar';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-main-page',
@@ -20,6 +21,7 @@ import { ToolbarComponent } from '../../shared/ui/toolbar/toolbar';
     MatSelectModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    TranslocoModule,
   ],
   templateUrl: './main-page.html',
   styleUrl: './main-page.scss',

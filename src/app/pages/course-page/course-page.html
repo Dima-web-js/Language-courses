@@ -1,61 +1,61 @@
 @if (loading()) {
   <div class="loading-wrapper">
     <mat-spinner diameter="48"></mat-spinner>
-    <p>Загрузка курса...</p>
+    <p>{{ 'Загрузка курса...' | transloco }}</p>
   </div>
 } @else if (course(); as courseData) {
   <div class="course-container">
     <button mat-raised-button (click)="goBack()" class="back-button">
-      ← Назад к списку курсов
+      ← {{ 'Назад к списку курсов' | transloco }}
     </button>
 
     <mat-card class="course-header">
       <mat-card-header>
         <mat-card-title>{{ courseData.name }}</mat-card-title>
-        <mat-card-subtitle>Автор: {{ courseData.author }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ 'Автор' | transloco }}: {{ courseData.author }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <div class="course-meta">
           <mat-chip-set>
             <mat-chip>{{ courseData.level }}</mat-chip>
-            <mat-chip>{{ courseData.category === 'adults' ? 'Для взрослых' : 'Для детей' }}</mat-chip>
+            <mat-chip>{{ (courseData.category === 'adults' ? 'Для взрослых' : 'Для детей') | transloco }}</mat-chip>
             <mat-chip>{{ courseData.theme }}</mat-chip>
             <mat-chip>{{ courseData.language }}</mat-chip>
             <mat-chip>⭐ {{ courseData.rate }}/5</mat-chip>
           </mat-chip-set>
         </div>
 
-        <h3>Описание курса</h3>
+        <h3>{{ 'Описание курса' | transloco }}</h3>
         <p>{{ courseData.description }}</p>
 
-        <h3>Цели курса</h3>
+        <h3>{{ 'Цели курса' | transloco }}</h3>
         <ul class="goals-list">
           @for (goal of courseData.goals; track goal) {
             <li>{{ goal }}</li>
           }
         </ul>
 
-        <h3>Программа</h3>
+        <h3>{{ 'Программа' | transloco }}</h3>
         <p>{{ courseData.program }}</p>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="lessons-card">
       <mat-card-header>
-        <mat-card-title>Уроки курса</mat-card-title>
+        <mat-card-title>{{ 'Уроки курса' | transloco }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <table mat-table [dataSource]="courseData.lessons" class="mat-elevation-z8 lessons-table">
           <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef>Название урока</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'Название урока' | transloco }}</th>
             <td mat-cell *matCellDef="let lesson">{{ lesson.title }}</td>
           </ng-container>
           <ng-container matColumnDef="duration">
-            <th mat-header-cell *matHeaderCellDef>Длительность</th>
-            <td mat-cell *matCellDef="let lesson">{{ lesson.duration }} мин</td>
+            <th mat-header-cell *matHeaderCellDef>{{ 'Длительность' | transloco }}</th>
+            <td mat-cell *matCellDef="let lesson">{{ lesson.duration }} {{ 'мин' | transloco }}</td>
           </ng-container>
           <ng-container matColumnDef="progress">
-            <th mat-header-cell *matHeaderCellDef>Прогресс</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'Прогресс' | transloco }}</th>
             <td mat-cell *matCellDef="let lesson">
               @if (lesson.progress !== undefined) {
                 <div class="progress-cell">
@@ -83,7 +83,7 @@
   </div>
 } @else {
   <div class="error-container">
-    <p>Курс не найден</p>
-    <button mat-raised-button (click)="goBack()">Вернуться к списку курсов</button>
+    <p>{{ 'Курс не найден' | transloco }}</p>
+    <button mat-raised-button (click)="goBack()">{{ 'Назад к списку курсов' | transloco }}</button>
   </div>
 }

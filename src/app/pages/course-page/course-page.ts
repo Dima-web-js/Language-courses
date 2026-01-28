@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { Course } from '../../shared/interfaces/course.model';
 import { CoursesService } from '../../shared/services/courses.service';
 import { MatCardModule } from '@angular/material/card';
@@ -19,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatChipsModule,
     MatProgressSpinnerModule,
+    TranslocoModule,
   ],
   templateUrl: './course-page.html',
   styleUrl: './course-page.scss',

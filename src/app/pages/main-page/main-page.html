@@ -1,38 +1,37 @@
 
-
 <div class="filters flex flex-row gap-2">
   <mat-form-field>
-    <mat-label>Поиск курсов</mat-label>
+    <mat-label>{{ 'Поиск курсов' | transloco }}</mat-label>
     <input
       matInput
       (keyup)="applyFilter($event)"
-      placeholder="Поиск по всем полям..."
+      [placeholder]="'Поиск по всем полям...' | transloco"
       #input
       class="filter"
     />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Тема</mat-label>
+    <mat-label>{{ 'Тема' | transloco }}</mat-label>
     <mat-select [value]="selectedTheme ?? ''" (selectionChange)="onThemeChange($event.value)">
-      <mat-option value="">Все темы</mat-option>
+      <mat-option value="">{{ 'Все темы' | transloco }}</mat-option>
       @for (theme of themeOptions; track theme) {
         <mat-option [value]="theme">{{ theme }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Сложность</mat-label>
+    <mat-label>{{ 'Сложность' | transloco }}</mat-label>
     <mat-select [value]="selectedLevel ?? ''" (selectionChange)="onLevelChange($event.value)">
-      <mat-option value="">Все уровни</mat-option>
+      <mat-option value="">{{ 'Все уровни' | transloco }}</mat-option>
       @for (level of levelOptions; track level) {
         <mat-option [value]="level">{{ level }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Язык</mat-label>
+    <mat-label>{{ 'Язык' | transloco }}</mat-label>
     <mat-select [value]="selectedLanguage ?? ''" (selectionChange)="onLanguageChange($event.value)">
-      <mat-option value="">Все языки</mat-option>
+      <mat-option value="">{{ 'Все языки' | transloco }}</mat-option>
       @for (lang of languageOptions; track lang) {
         <mat-option [value]="lang">{{ lang }}</mat-option>
       }
@@ -44,32 +43,28 @@
   @if (loading()) {
     <div class="loading-wrapper">
       <mat-spinner diameter="48"></mat-spinner>
-      <p>Загрузка курсов...</p>
+      <p>{{ 'Загрузка курсов...' | transloco }}</p>
     </div>
   } @else {
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Название курса -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Название курса </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'Название курса' | transloco }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
-    <!-- Категория -->
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Категория </th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'Категория' | transloco }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
     </ng-container>
 
-    <!-- Рейтинг -->
     <ng-container matColumnDef="rate">
-      <th mat-header-cell *matHeaderCellDef> Рейтинг </th>
-      <td mat-cell *matCellDef="let element"> {{element.rate}}/5 </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'Рейтинг' | transloco }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.rate }}/5</td>
     </ng-container>
 
-    <!-- Автор -->
     <ng-container matColumnDef="author">
-      <th mat-header-cell *matHeaderCellDef> Автор </th>
-      <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ 'Автор' | transloco }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.author }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -80,10 +75,9 @@
       class="clickable-row"
     ></tr>
 
-    <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">
-        Не найдено курсов по запросу "{{input.value}}"
+        {{ 'Не найдено курсов по запросу' | transloco }} "{{ input.value }}"
       </td>
     </tr>
   </table>

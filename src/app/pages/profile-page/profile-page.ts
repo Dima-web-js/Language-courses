@@ -3,6 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
 import { ProfileModel } from '../../shared/interfaces/profile.model';
 import { Profile } from '../../shared/services/profile.service';
@@ -11,7 +12,13 @@ import { AuthService } from '../../shared/services/auth.service';
 @Component({
   selector: 'app-profile-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, MatButtonModule, MatChipsModule, MatProgressSpinnerModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    TranslocoModule,
+  ],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.scss',
 })
@@ -19,6 +26,7 @@ export class ProfilePage implements OnInit {
   private readonly router = inject(Router);
   private readonly profileService = inject(Profile);
   private readonly authService = inject(AuthService);
+  private readonly transloco = inject(TranslocoService);
 
   profile = signal<ProfileModel | undefined>(undefined);
   loading = signal(true);
@@ -43,7 +51,8 @@ export class ProfilePage implements OnInit {
   getRoleLabel(): string {
     const profileData = this.profile();
     if (!profileData) return '';
-    return profileData.role === 'teacher' ? 'Преподаватель' : 'Ученик';
+    const key = profileData.role === 'teacher' ? 'Преподаватель' : 'Ученик';
+    return this.transloco.translate(key);
   }
 
   logout(): void {

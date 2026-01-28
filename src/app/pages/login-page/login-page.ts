@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { TranslocoModule } from '@jsverse/transloco';
 import { AuthService } from '../../shared/services/auth.service';
 
 interface LoginFormData {
@@ -29,6 +30,7 @@ interface LoginFormData {
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    TranslocoModule,
   ],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
