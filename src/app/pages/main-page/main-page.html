@@ -1,7 +1,4 @@
-<div class="header">
-  <h2>Каталог курсов</h2>
-  <button mat-raised-button (click)="goToProfile()">Личный кабинет</button>
-</div>
+
 
 <div class="filters flex flex-row gap-2">
   <mat-form-field>
@@ -43,9 +40,13 @@
   </mat-form-field>
 </div>
 
-<div class="container">
-
-
+<div class="container max-h-[75vh] overflow-auto">
+  @if (loading()) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Загрузка курсов...</p>
+    </div>
+  } @else {
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Название курса -->
     <ng-container matColumnDef="name">
@@ -86,4 +87,5 @@
       </td>
     </tr>
   </table>
+  }
 </div>

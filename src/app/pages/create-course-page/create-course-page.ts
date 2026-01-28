@@ -78,11 +78,11 @@ export class CreateCoursePage {
     if (this.courseForm.valid) {
       console.log('Course data:', this.courseForm.value);
       alert('Курс успешно создан! (это демо-форма, данные не сохраняются)');
-      this.router.navigate(['/list-of-courses']);
+      this.router.navigate(['/platform/list-of-courses']);
     }
   }
 
   cancel() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/platform/profile']);
   }
 }

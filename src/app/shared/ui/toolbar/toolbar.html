@@ -1,0 +1,39 @@
+<mat-toolbar class="app-toolbar">
+  <span class="toolbar-title">Каталог курсов</span>
+  <span class="toolbar-spacer"></span>
+
+  <div class="desktop-nav">
+    <button mat-button (click)="goToAllCourses()">
+      <mat-icon>menu_book</mat-icon>
+      Все курсы
+    </button>
+    <button mat-button (click)="goToProfile()">
+      <mat-icon>account_circle</mat-icon>
+      @if (userEmail(); as email) {
+        <span class="email-text">{{ email }}</span>
+      } @else {
+        Мой профиль
+      }
+    </button>
+  </div>
+
+  <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="mobile-menu-button">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #mobileMenu="matMenu">
+    <button mat-menu-item (click)="goToAllCourses()">
+      <mat-icon>menu_book</mat-icon>
+      <span>Все курсы</span>
+    </button>
+    <button mat-menu-item (click)="goToProfile()">
+      <mat-icon>account_circle</mat-icon>
+      <span>
+        @if (userEmail(); as email) {
+          {{ email }}
+        } @else {
+          Мой профиль
+        }
+      </span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

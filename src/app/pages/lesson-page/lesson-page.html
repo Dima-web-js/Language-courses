@@ -1,17 +1,19 @@
-@if (course() && lesson(); as lessonData) {
+@if (loading()) {
+  <div class="loading-wrapper">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Загрузка урока...</p>
+  </div>
+} @else if (lessonContent(); as content) {
   <div class="lesson-container">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ lessonData.title }}</mat-card-title>
-        <mat-card-subtitle>
-          Курс: {{ course()!.name }} | Длительность: {{ lessonData.duration }} мин
-        </mat-card-subtitle>
+        <mat-card-title>{{ content.title }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="video-container">
-          @if (safeVideoUrl()) {
+          @if (safeVideoUrl(); as videoSrc) {
             <iframe
-              [src]="safeVideoUrl()"
+              [src]="videoSrc"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -23,6 +25,11 @@
           <button mat-raised-button (click)="goBackToCourse()">
             Вернуться к курсу
           </button>
+          @if (hasPreviousLesson()) {
+            <button mat-raised-button (click)="goToPreviousLesson()">
+              ← Предыдущий урок
+            </button>
+          }
           @if (hasNextLesson()) {
             <button mat-raised-button color="primary" (click)="goToNextLesson()">
               Следующий урок →

@@ -1,4 +1,9 @@
-@if (course(); as courseData) {
+@if (loading()) {
+  <div class="loading-wrapper">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Загрузка курса...</p>
+  </div>
+} @else if (course(); as courseData) {
   <div class="course-container">
     <button mat-raised-button (click)="goBack()" class="back-button">
       ← Назад к списку курсов
