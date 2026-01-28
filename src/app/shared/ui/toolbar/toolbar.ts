@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslocoModule } from '@jsverse/transloco';
 import { AuthService } from '../../services/auth.service';
-import { LanguageSwitcherComponent } from '../../../components/language-switcher/language-switcher';
+import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
 
 @Component({
   selector: 'app-toolbar',

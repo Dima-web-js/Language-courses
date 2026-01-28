@@ -6,6 +6,7 @@ import { provideTransloco, TranslocoService } from '@jsverse/transloco';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { authTokenInterceptor } from './shared/interceptors/auth-token.interceptor';
+import { cacheInterceptor } from './shared/interceptors/cache.interceptor';
 import { unauthorizedInterceptor } from './shared/interceptors/unauthorized.interceptor';
 import { TranslocoHttpLoader } from './transloco-loader';
 
@@ -29,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withFetch(),
-      withInterceptors([authTokenInterceptor, unauthorizedInterceptor])
+      withInterceptors([authTokenInterceptor, cacheInterceptor, unauthorizedInterceptor])
     ),
     provideClientHydration(withEventReplay()),
     provideTransloco({
