@@ -1,0 +1,41 @@
+<div class="filters flex flex-row gap-2">
+  <mat-form-field>
+    <mat-label>{{ 'Поиск курсов' | transloco }}</mat-label>
+    <input
+      matInput
+      (keyup)="onSearchKeyup($event)"
+      [placeholder]="'Поиск по всем полям...' | transloco"
+      class="filter"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'Тема' | transloco }}</mat-label>
+    <mat-select [value]="selectedTheme() ?? ''" (selectionChange)="themeChange.emit($event.value)">
+      <mat-option value="">{{ 'Все темы' | transloco }}</mat-option>
+      @for (theme of themeOptions; track theme) {
+        <mat-option [value]="theme">{{ theme }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'Сложность' | transloco }}</mat-label>
+    <mat-select [value]="selectedLevel() ?? ''" (selectionChange)="levelChange.emit($event.value)">
+      <mat-option value="">{{ 'Все уровни' | transloco }}</mat-option>
+      @for (level of levelOptions; track level) {
+        <mat-option [value]="level">{{ level }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'Язык' | transloco }}</mat-label>
+    <mat-select [value]="selectedLanguage() ?? ''" (selectionChange)="languageChange.emit($event.value)">
+      <mat-option value="">{{ 'Все языки' | transloco }}</mat-option>
+      @for (lang of languageOptions; track lang) {
+        <mat-option [value]="lang">{{ lang }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

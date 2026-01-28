@@ -1,43 +1,15 @@
-
-<div class="filters flex flex-row gap-2">
-  <mat-form-field>
-    <mat-label>{{ 'Поиск курсов' | transloco }}</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      [placeholder]="'Поиск по всем полям...' | transloco"
-      #input
-      class="filter"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'Тема' | transloco }}</mat-label>
-    <mat-select [value]="selectedTheme ?? ''" (selectionChange)="onThemeChange($event.value)">
-      <mat-option value="">{{ 'Все темы' | transloco }}</mat-option>
-      @for (theme of themeOptions; track theme) {
-        <mat-option [value]="theme">{{ theme }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'Сложность' | transloco }}</mat-label>
-    <mat-select [value]="selectedLevel ?? ''" (selectionChange)="onLevelChange($event.value)">
-      <mat-option value="">{{ 'Все уровни' | transloco }}</mat-option>
-      @for (level of levelOptions; track level) {
-        <mat-option [value]="level">{{ level }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>{{ 'Язык' | transloco }}</mat-label>
-    <mat-select [value]="selectedLanguage ?? ''" (selectionChange)="onLanguageChange($event.value)">
-      <mat-option value="">{{ 'Все языки' | transloco }}</mat-option>
-      @for (lang of languageOptions; track lang) {
-        <mat-option [value]="lang">{{ lang }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-</div>
+<app-filters
+  ngSkipHydration
+  [themeOptions]="themeOptions"
+  [languageOptions]="languageOptions"
+  [selectedTheme]="selectedTheme"
+  [selectedLevel]="selectedLevel"
+  [selectedLanguage]="selectedLanguage"
+  (searchChange)="onSearchChange($event)"
+  (themeChange)="onThemeChange($event)"
+  (levelChange)="onLevelChange($event)"
+  (languageChange)="onLanguageChange($event)"
+></app-filters>
 
 <div class="container max-h-[75vh] overflow-auto">
   @if (loading()) {
@@ -77,7 +49,7 @@
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">
-        {{ 'Не найдено курсов по запросу' | transloco }} "{{ input.value }}"
+        {{ 'Не найдено курсов по запросу' | transloco }} "{{ searchFilterText }}"
       </td>
     </tr>
   </table>

@@ -3,18 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment.dev';
+import { AuthLoginResponse, LoginFormData } from '../interfaces/login-form.model';
 
 
-export interface AuthLoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface AuthLoginResponse {
-  access_token: string;
-  email: string;
-  role: string;
-}
 
 const STORAGE_KEYS = {
   accessToken: 'accessToken',
@@ -31,7 +22,7 @@ export class AuthService {
 
   private readonly baseUrl = environment.apiUrl;
 
-  login(credentials: AuthLoginRequest): Observable<AuthLoginResponse> {
+  login(credentials: LoginFormData): Observable<AuthLoginResponse> {
     const url = `${this.baseUrl}/auth/login`;
     return this.http.post<AuthLoginResponse>(url, credentials).pipe(
       tap((body) => this.saveSession(body))

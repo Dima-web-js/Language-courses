@@ -15,11 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { TranslocoModule } from '@jsverse/transloco';
 import { AuthService } from '../../shared/services/auth.service';
+import { LoginFormData } from '../../shared/interfaces/login-form.model';
 
-interface LoginFormData {
-  email: string;
-  password: string;
-}
 
 @Component({
   selector: 'app-login-page',

@@ -1,27 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CourseListItem, Level, LEVEL } from '../../shared/interfaces/course.model';
+import { CourseListItem, Level } from '../../shared/interfaces/course.model';
 import { Router } from '@angular/router';
 import { CoursesService } from '../../shared/services/courses.service';
-import { ToolbarComponent } from '../../shared/ui/toolbar/toolbar';
 import { TranslocoModule } from '@jsverse/transloco';
+import { Filters } from '../../shared/ui/filters/filters';
 
 @Component({
   selector: 'app-main-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatFormFieldModule,
-    MatInputModule,
     MatTableModule,
-    MatSelectModule,
-    MatButtonModule,
     MatProgressSpinnerModule,
     TranslocoModule,
+    Filters,
   ],
   templateUrl: './main-page.html',
   styleUrl: './main-page.scss',
@@ -35,13 +28,14 @@ export class MainPage implements OnInit {
   loading = signal(true);
 
   themeOptions: string[] = [];
-  readonly levelOptions: Level[] = Object.values(LEVEL);
   readonly languageOptions: string[] = ['Английский', 'Англ-рус'];
 
   searchFilterText = '';
-  selectedTheme: string | null = null;
-  selectedLevel: Level | null = null;
-  selectedLanguage: string | null = null;
+
+  // null = "все"
+  selectedTheme = signal<string | null>(null);
+  selectedLevel = signal<Level | null>(null);
+  selectedLanguage = signal<string | null>(null);
 
   constructor() {
     this.dataSource.filterPredicate = (data: CourseListItem, filterStr: string) =>
@@ -54,37 +48,38 @@ export class MainPage implements OnInit {
         this.dataSource.data = data;
         this.themeOptions = [...new Set(data.map((c) => c.theme))].sort();
         this.loading.set(false);
+        this.applyFilters();
       },
       error: () => this.loading.set(false),
     });
   }
 
-  applyFilter(event: Event) {
-    this.searchFilterText = ((event.target as HTMLInputElement).value ?? '').trim().toLowerCase();
+  onSearchChange(v: string) {
+    this.searchFilterText = v;
     this.applyFilters();
   }
 
   onThemeChange(value: string) {
-    this.selectedTheme = value || null;
+    this.selectedTheme.set(value || null);
     this.applyFilters();
   }
 
-  onLevelChange(value: Level | '') {
-    this.selectedLevel = (value || null) as Level | null;
+  onLevelChange(value: Level | null) {
+    this.selectedLevel.set(value ?? null);
     this.applyFilters();
   }
 
   onLanguageChange(value: string) {
-    this.selectedLanguage = value || null;
+    this.selectedLanguage.set(value || null);
     this.applyFilters();
   }
 
   private applyFilters() {
     this.dataSource.filter = JSON.stringify({
       search: this.searchFilterText,
-      theme: this.selectedTheme,
-      level: this.selectedLevel,
-      language: this.selectedLanguage,
+      theme: this.selectedTheme(),
+      level: this.selectedLevel(),
+      language: this.selectedLanguage(),
     });
   }
 
@@ -93,12 +88,13 @@ export class MainPage implements OnInit {
   }
 
   private filterPredicate(data: CourseListItem, filterStr: string): boolean {
-    let f: { search: string; theme: string | null; level: string | null; language: string | null };
+    let f: { search: string; theme: string; level: string; language: string };
     try {
       f = JSON.parse(filterStr || '{}');
     } catch {
       return true;
     }
+
     if (f.search) {
       const search = f.search.toLowerCase();
       const match =
@@ -111,9 +107,11 @@ export class MainPage implements OnInit {
         String(data.rate).includes(search);
       if (!match) return false;
     }
+
     if (f.theme && data.theme !== f.theme) return false;
     if (f.level && data.level !== f.level) return false;
     if (f.language && data.language !== f.language) return false;
+
     return true;
   }
 }

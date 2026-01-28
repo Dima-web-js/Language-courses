@@ -21,6 +21,9 @@ function getInitialLang(platformId: object): string {
   imports: [MatFormFieldModule, MatSelectModule, FormsModule, TranslocoModule],
   templateUrl: './language-switcher.html',
   styleUrl: './language-switcher.scss',
+  host: {
+    ngSkipHydration: 'true',
+  },
 })
 export class LanguageSwitcherComponent {
   private readonly transloco = inject(TranslocoService);
