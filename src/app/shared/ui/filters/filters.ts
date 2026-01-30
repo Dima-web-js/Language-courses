@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,17 +16,17 @@ import { Level, LEVEL } from '../../interfaces/course.model';
   },
 })
 export class Filters {
-  @Input({ required: true }) themeOptions: string[] = [];
-  @Input({ required: true }) languageOptions: string[] = [];
+  themeOptions = input.required<string[]>();
+  languageOptions = input.required<string[]>();
 
-  @Input({ required: true }) selectedTheme!: () => string | null;
-  @Input({ required: true }) selectedLevel!: () => Level | null;
-  @Input({ required: true }) selectedLanguage!: () => string | null;
+  selectedTheme = input.required<() => string | null>();
+  selectedLevel = input.required<() => Level | null>();
+  selectedLanguage = input.required<() => string | null>();
 
-  @Output() searchChange = new EventEmitter<string>();
-  @Output() themeChange = new EventEmitter<string>();
-  @Output() levelChange = new EventEmitter<Level | null>();
-  @Output() languageChange = new EventEmitter<string>();
+  searchChange = output<string>();
+  themeChange = output<string>();
+  levelChange = output<Level | null>();
+  languageChange = output<string>();
 
   readonly levelOptions: Level[] = Object.values(LEVEL);
 

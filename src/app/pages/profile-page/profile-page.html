@@ -2,25 +2,25 @@
   @if (loading()) {
     <div class="loading-wrapper">
       <mat-spinner diameter="48"></mat-spinner>
-      <p>{{ 'Загрузка профиля...' | transloco }}</p>
+      <p transloco="Загрузка профиля..."></p>
     </div>
   } @else if (profile(); as profileData) {
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ 'Личный кабинет' | transloco }}</mat-card-title>
+        <mat-card-title transloco="Личный кабинет"></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="profile-info">
           <div class="info-row">
-            <span class="label">{{ 'Имя' | transloco }}:</span>
+            <span class="label" transloco="Имя"></span>:
             <span class="value">{{ profileData.name }}</span>
           </div>
           <div class="info-row">
-            <span class="label">{{ 'Email' | transloco }}:</span>
+            <span class="label" transloco="Email"></span>:
             <span class="value">{{ profileData.email }}</span>
           </div>
           <div class="info-row">
-            <span class="label">{{ 'Роль' | transloco }}:</span>
+            <span class="label" transloco="Роль"></span>:
             <mat-chip-set>
               <mat-chip [class.teacher-chip]="profileData.role === 'teacher'">
                 {{ getRoleLabel() }}
@@ -31,23 +31,19 @@
 
         @if (profileData.role === 'teacher') {
           <div class="teacher-actions">
-            <h3>{{ 'Действия преподавателя' | transloco }}</h3>
-            <button mat-raised-button color="primary" (click)="goToCreateCourse()">
-              {{ 'Создать новый курс' | transloco }}
-            </button>
+            <h3 transloco="Действия преподавателя"></h3>
+            <button mat-raised-button color="primary" (click)="goToCreateCourse()" transloco="Создать новый курс"></button>
           </div>
         }
 
         <div class="logout-actions">
-          <button mat-stroked-button color="warn" (click)="logout()">
-            {{ 'Выйти' | transloco }}
-          </button>
+          <button mat-stroked-button color="warn" (click)="logout()" transloco="Выйти"></button>
         </div>
       </mat-card-content>
     </mat-card>
   } @else {
     <div class="error-container">
-      <p>{{ 'Не удалось загрузить профиль' | transloco }}</p>
+      <p transloco="Не удалось загрузить профиль"></p>
     </div>
   }
 </div>

@@ -1,19 +1,19 @@
 <mat-toolbar class="app-toolbar">
-  <span class="toolbar-title">{{ 'Каталог курсов' | transloco }}</span>
+  <span class="toolbar-title" transloco="Каталог курсов"></span>
   <span class="toolbar-spacer"></span>
 
   <div class="desktop-nav">
     <app-language-switcher />
     <button mat-button (click)="goToAllCourses()">
       <mat-icon>menu_book</mat-icon>
-      {{ 'Все курсы' | transloco }}
+      <span transloco="Все курсы"></span>
     </button>
     <button mat-button (click)="goToProfile()">
       <mat-icon>account_circle</mat-icon>
       @if (userEmail(); as email) {
         <span class="email-text">{{ email }}</span>
       } @else {
-        {{ 'Мой профиль' | transloco }}
+        <span transloco="Мой профиль"></span>
       }
     </button>
   </div>
@@ -24,7 +24,7 @@
   <mat-menu #mobileMenu="matMenu">
     <button mat-menu-item (click)="goToAllCourses()">
       <mat-icon>menu_book</mat-icon>
-      <span>{{ 'Все курсы' | transloco }}</span>
+      <span transloco="Все курсы"></span>
     </button>
     <button mat-menu-item (click)="goToProfile()">
       <mat-icon>account_circle</mat-icon>
@@ -32,7 +32,7 @@
         @if (userEmail(); as email) {
           {{ email }}
         } @else {
-          {{ 'Мой профиль' | transloco }}
+          <ng-container transloco="Мой профиль"></ng-container>
         }
       </span>
     </button>

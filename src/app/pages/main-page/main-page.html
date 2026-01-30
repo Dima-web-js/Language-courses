@@ -9,33 +9,33 @@
   (themeChange)="onThemeChange($event)"
   (levelChange)="onLevelChange($event)"
   (languageChange)="onLanguageChange($event)"
-></app-filters>
+></app-filters> 
 
 <div class="container max-h-[75vh] overflow-auto">
   @if (loading()) {
     <div class="loading-wrapper">
       <mat-spinner diameter="48"></mat-spinner>
-      <p>{{ 'Загрузка курсов...' | transloco }}</p>
+      <p transloco="Загрузка курсов..."></p>
     </div>
   } @else {
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>{{ 'Название курса' | transloco }}</th>
+      <th mat-header-cell *matHeaderCellDef transloco="Название курса"></th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef>{{ 'Категория' | transloco }}</th>
+      <th mat-header-cell *matHeaderCellDef transloco="Категория"></th>
       <td mat-cell *matCellDef="let element">{{ element.category }}</td>
     </ng-container>
 
     <ng-container matColumnDef="rate">
-      <th mat-header-cell *matHeaderCellDef>{{ 'Рейтинг' | transloco }}</th>
+      <th mat-header-cell *matHeaderCellDef transloco="Рейтинг"></th>
       <td mat-cell *matCellDef="let element">{{ element.rate }}/5</td>
     </ng-container>
 
     <ng-container matColumnDef="author">
-      <th mat-header-cell *matHeaderCellDef>{{ 'Автор' | transloco }}</th>
+      <th mat-header-cell *matHeaderCellDef transloco="Автор"></th>
       <td mat-cell *matCellDef="let element">{{ element.author }}</td>
     </ng-container>
 
@@ -49,7 +49,7 @@
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">
-        {{ 'Не найдено курсов по запросу' | transloco }} "{{ searchFilterText }}"
+        <ng-container transloco="Не найдено курсов по запросу"></ng-container> "{{ searchFilterText }}"
       </td>
     </tr>
   </table>

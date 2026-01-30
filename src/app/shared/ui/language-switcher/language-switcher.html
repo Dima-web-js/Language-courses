@@ -3,7 +3,7 @@
     <mat-select [(ngModel)]="lang" (selectionChange)="onLangChange($event)">
       @for (item of langs; track item.id) {
         <mat-option [value]="item.id">
-          {{ item.name | transloco }}
+          <span [transloco]="item.name"></span>
         </mat-option>
       }
     </mat-select>
