@@ -30,15 +30,11 @@ export class LanguageSwitcherComponent {
   private readonly platformId = inject(PLATFORM_ID);
 
   readonly isBrowser = isPlatformBrowser(this.platformId);
-  lang: string;
+  lang = getInitialLang(inject(PLATFORM_ID));
   readonly langs = [
     { id: 'ru', name: 'русский' },
     { id: 'en', name: 'английский' },
   ];
-
-  constructor() {
-    this.lang = getInitialLang(this.platformId);
-  }
 
   onLangChange($event: { value: string }): void {
     const value = $event.value;

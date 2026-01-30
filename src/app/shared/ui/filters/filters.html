@@ -1,18 +1,33 @@
 <div class="filters flex flex-row gap-2">
   <mat-form-field>
     <mat-label transloco="Поиск курсов"></mat-label>
-    <input
-      matInput
-      (keyup)="onSearchKeyup($event)"
-      [placeholder]="'Поиск по всем полям...' | transloco"
-      class="filter"
-    />
+    <ng-container *transloco="let t">
+      <input
+        matInput
+        (keyup)="onSearchKeyup($event)"
+        [placeholder]="t('Поиск по всем полям...')"
+        class="filter"
+      />
+    </ng-container>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label transloco="Тема"></mat-label>
-    <mat-select [value]="selectedTheme()() ?? ''" (selectionChange)="themeChange.emit($event.value)">
-      <mat-option value=""><ng-container transloco="Все темы"></ng-container></mat-option>
+    <mat-select [value]="selectedTheme()" (selectionChange)="themeChange.emit($event.value)">
+      <!-- 
+      Вынес текст выбранного значения в mat-select-trigger — 
+      теперь он не зависит от наличия/отрисовки опций и не “проваливается” 
+      в пустоту при пересборке.
+      -->
+
+      <mat-select-trigger>
+        @if (selectedTheme() === allValue) {
+          <span transloco="Все темы"></span>
+        } @else {
+          {{ selectedTheme() }}
+        }
+      </mat-select-trigger>
+      <mat-option [value]="allValue"><span transloco="Все темы"></span></mat-option>
       @for (theme of themeOptions(); track theme) {
         <mat-option [value]="theme">{{ theme }}</mat-option>
       }
@@ -21,8 +36,15 @@
 
   <mat-form-field>
     <mat-label transloco="Сложность"></mat-label>
-    <mat-select [value]="selectedLevel()() ?? ''" (selectionChange)="levelChange.emit($event.value)">
-      <mat-option [value]='null'><ng-container transloco="Все уровни"></ng-container></mat-option>
+    <mat-select [value]="selectedLevel()" (selectionChange)="levelChange.emit($event.value)">
+      <mat-select-trigger>
+        @if (selectedLevel() === allValue) {
+          <span transloco="Все уровни"></span>
+        } @else {
+          {{ selectedLevel() }}
+        }
+      </mat-select-trigger>
+      <mat-option [value]="allValue"><span transloco="Все уровни"></span></mat-option>
       @for (level of levelOptions; track level) {
         <mat-option [value]="level">{{ level }}</mat-option>
       }
@@ -31,8 +53,15 @@
 
   <mat-form-field>
     <mat-label transloco="Язык"></mat-label>
-    <mat-select [value]="selectedLanguage()() ?? ''" (selectionChange)="languageChange.emit($event.value)">
-      <mat-option value=""><ng-container transloco="Все языки"></ng-container></mat-option>
+    <mat-select [value]="selectedLanguage()" (selectionChange)="languageChange.emit($event.value)">
+      <mat-select-trigger>
+        @if (selectedLanguage() === allValue) {
+          <span transloco="Все языки"></span>
+        } @else {
+          {{ selectedLanguage() }}
+        }
+      </mat-select-trigger>
+      <mat-option [value]="allValue"><span transloco="Все языки"></span></mat-option>
       @for (lang of languageOptions(); track lang) {
         <mat-option [value]="lang">{{ lang }}</mat-option>
       }

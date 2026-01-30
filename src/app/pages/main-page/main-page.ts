@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CourseListItem, Level } from '../../shared/interfaces/course.model';
+import { CourseListItem } from '../../shared/interfaces/course.model';
 import { Router } from '@angular/router';
 import { CoursesService } from '../../shared/services/courses.service';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Filters } from '../../shared/ui/filters/filters';
+import { ALL_FILTER_VALUE, Filters } from '../../shared/ui/filters/filters';
 
 @Component({
   selector: 'app-main-page',
@@ -34,10 +34,9 @@ export class MainPage implements OnInit {
 
   searchFilterText = '';
 
-  // null = "все"
-  selectedTheme = signal<string | null>(null);
-  selectedLevel = signal<Level | null>(null);
-  selectedLanguage = signal<string | null>(null);
+  selectedTheme = signal<string>(ALL_FILTER_VALUE);
+  selectedLevel = signal<string>(ALL_FILTER_VALUE);
+  selectedLanguage = signal<string>(ALL_FILTER_VALUE);
 
   constructor() {
     this.dataSource.filterPredicate = (data: CourseListItem, filterStr: string) =>
@@ -62,26 +61,26 @@ export class MainPage implements OnInit {
   }
 
   onThemeChange(value: string) {
-    this.selectedTheme.set(value || null);
+    this.selectedTheme.set(value || ALL_FILTER_VALUE);
     this.applyFilters();
   }
 
-  onLevelChange(value: Level | null) {
-    this.selectedLevel.set(value ?? null);
+  onLevelChange(value: string) {
+    this.selectedLevel.set(value || ALL_FILTER_VALUE);
     this.applyFilters();
   }
 
   onLanguageChange(value: string) {
-    this.selectedLanguage.set(value || null);
+    this.selectedLanguage.set(value || ALL_FILTER_VALUE);
     this.applyFilters();
   }
 
   private applyFilters() {
     this.dataSource.filter = JSON.stringify({
       search: this.searchFilterText,
-      theme: this.selectedTheme(),
-      level: this.selectedLevel(),
-      language: this.selectedLanguage(),
+      theme: this.selectedTheme() === ALL_FILTER_VALUE ? '' : this.selectedTheme(),
+      level: this.selectedLevel() === ALL_FILTER_VALUE ? '' : this.selectedLevel(),
+      language: this.selectedLanguage() === ALL_FILTER_VALUE ? '' : this.selectedLanguage(),
     });
   }
 

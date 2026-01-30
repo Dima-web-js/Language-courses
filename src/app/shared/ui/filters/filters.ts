@@ -5,6 +5,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { TranslocoModule } from '@jsverse/transloco';
 import { Level, LEVEL } from '../../interfaces/course.model';
 
+export const ALL_FILTER_VALUE = '__all__';
+
 @Component({
   selector: 'app-filters',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,15 +21,16 @@ export class Filters {
   themeOptions = input.required<string[]>();
   languageOptions = input.required<string[]>();
 
-  selectedTheme = input.required<() => string | null>();
-  selectedLevel = input.required<() => Level | null>();
-  selectedLanguage = input.required<() => string | null>();
+  selectedTheme = input.required<string>();
+  selectedLevel = input.required<string>();
+  selectedLanguage = input.required<string>();
 
   searchChange = output<string>();
   themeChange = output<string>();
-  levelChange = output<Level | null>();
+  levelChange = output<string>();
   languageChange = output<string>();
 
+  readonly allValue = ALL_FILTER_VALUE;
   readonly levelOptions: Level[] = Object.values(LEVEL);
 
   onSearchKeyup(event: Event) {

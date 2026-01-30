@@ -2,9 +2,9 @@
   ngSkipHydration
   [themeOptions]="themeOptions"
   [languageOptions]="languageOptions"
-  [selectedTheme]="selectedTheme"
-  [selectedLevel]="selectedLevel"
-  [selectedLanguage]="selectedLanguage"
+  [selectedTheme]="selectedTheme()"
+  [selectedLevel]="selectedLevel()"
+  [selectedLanguage]="selectedLanguage()"
   (searchChange)="onSearchChange($event)"
   (themeChange)="onThemeChange($event)"
   (levelChange)="onLevelChange($event)"
