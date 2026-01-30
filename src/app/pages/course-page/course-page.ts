@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { Course } from '../../shared/interfaces/course.model';
@@ -29,6 +30,7 @@ export class CoursePage implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly coursesService = inject(CoursesService);
+  private readonly destroyRef = inject(DestroyRef);
 
   course = signal<Course | undefined>(undefined);
   loading = signal(true);
@@ -42,7 +44,7 @@ export class CoursePage implements OnInit {
       this.loading.set(false);
       return;
     }
-    this.coursesService.getCourseById(id).subscribe({
+    this.coursesService.getCourseById(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         this.course.set(data);
         this.loading.set(false);

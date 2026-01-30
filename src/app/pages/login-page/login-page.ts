@@ -1,9 +1,11 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  DestroyRef,
   signal,
   inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs';
@@ -36,6 +38,7 @@ import { LoginFormData } from '../../shared/interfaces/login-form.model';
 export class LoginPage {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly loginModel = signal<LoginFormData>({
     email: '',
@@ -69,7 +72,10 @@ export class LoginPage {
     this.loading.set(true);
     this.authService
       .login(this.loginModel())
-      .pipe(finalize(() => this.loading.set(false)))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.loading.set(false))
+      )
       .subscribe({
         next: () => this.router.navigate(['/platform/list-of-courses']),
         error: (err: HttpErrorResponse) => {

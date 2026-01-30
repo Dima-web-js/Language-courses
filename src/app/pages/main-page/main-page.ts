@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CourseListItem, Level } from '../../shared/interfaces/course.model';
@@ -22,6 +23,7 @@ import { Filters } from '../../shared/ui/filters/filters';
 export class MainPage implements OnInit {
   private readonly router = inject(Router);
   private readonly coursesService = inject(CoursesService);
+  private readonly destroyRef = inject(DestroyRef);
 
   displayedColumns: string[] = ['category', 'name', 'rate', 'author'];
   dataSource = new MatTableDataSource<CourseListItem>([]);
@@ -43,7 +45,7 @@ export class MainPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.coursesService.getCourses().subscribe({
+    this.coursesService.getCourses().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         this.dataSource.data = data;
         this.themeOptions = [...new Set(data.map((c) => c.theme))].sort();
