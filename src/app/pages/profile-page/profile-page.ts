@@ -1,14 +1,12 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
-import { ProfileModel } from '../../shared/interfaces/profile.model';
-import { Profile } from '../../shared/services/profile.service';
-import { AuthService } from '../../shared/services/auth.service';
+import { ProfileStore } from '../../shared/store/profile.store';
+import { AuthStore } from '../../shared/store/auth.store';
 
 @Component({
   selector: 'app-profile-page',
@@ -25,39 +23,27 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class ProfilePage implements OnInit {
   private readonly router = inject(Router);
-  private readonly profileService = inject(Profile);
-  private readonly authService = inject(AuthService);
+  readonly profileStore = inject(ProfileStore);
+  readonly authStore = inject(AuthStore);
   private readonly transloco = inject(TranslocoService);
-  private readonly destroyRef = inject(DestroyRef);
 
-  profile = signal<ProfileModel | undefined>(undefined);
-  loading = signal(true);
+  readonly roleLabel = computed(() => {
+    const profile = this.profileStore.profile();
+    if (!profile) return '';
+    const key = profile.role === 'teacher' ? 'Преподаватель' : 'Ученик';
+    return this.transloco.translate(key);
+  });
 
   ngOnInit(): void {
-    this.profileService.getProfile().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: (data) => {
-        this.profile.set(data);
-        this.loading.set(false);
-      },
-      error: () => {
-        this.profile.set(undefined);
-        this.loading.set(false);
-      },
-    });
+    this.profileStore.loadProfile();
   }
 
   goToCreateCourse() {
     this.router.navigate(['/platform/create-course']);
   }
 
-  getRoleLabel(): string {
-    const profileData = this.profile();
-    if (!profileData) return '';
-    const key = profileData.role === 'teacher' ? 'Преподаватель' : 'Ученик';
-    return this.transloco.translate(key);
-  }
-
   logout(): void {
-    this.authService.logout();
+    this.authStore.logout();
+    this.profileStore.clearProfile();
   }
 }

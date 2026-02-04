@@ -10,7 +10,7 @@
     </button>
     <button mat-button (click)="goToProfile()">
       <mat-icon>account_circle</mat-icon>
-      @if (userEmail(); as email) {
+      @if (authStore.email(); as email) {
         <span class="email-text">{{ email }}</span>
       } @else {
         <span transloco="Мой профиль"></span>
@@ -29,7 +29,7 @@
     <button mat-menu-item (click)="goToProfile()">
       <mat-icon>account_circle</mat-icon>
       <span>
-        @if (userEmail(); as email) {
+        @if (authStore.email(); as email) {
           {{ email }}
         } @else {
           <ng-container transloco="Мой профиль"></ng-container>

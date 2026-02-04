@@ -1,11 +1,11 @@
 import { inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthStore } from '../store/auth.store';
 
 export const authGuard: CanActivateFn = () => {
   const platformId = inject(PLATFORM_ID);
-  const authService = inject(AuthService);
+  const authStore = inject(AuthStore);
   const router = inject(Router);
 
   // На сервере (SSR) не знаем о localStorage, поэтому не редиректим на логин.
@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = () => {
     return true;
   }
 
-  if (authService.isAuthenticated()) {
+  if (authStore.isAuthenticated()) {
     return true;
   }
   return router.createUrlTree(['/login']);

@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, OnInit, computed, effect, inject, signal } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CourseListItem } from '../../shared/interfaces/course.model';
 import { Router } from '@angular/router';
-import { CoursesService } from '../../shared/services/courses.service';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ALL_FILTER_VALUE, Filters } from '../../shared/ui/filters/filters';
+import { CoursesStore } from '../../shared/store/courses.store';
 
 @Component({
   selector: 'app-main-page',
@@ -22,14 +21,15 @@ import { ALL_FILTER_VALUE, Filters } from '../../shared/ui/filters/filters';
 })
 export class MainPage implements OnInit {
   private readonly router = inject(Router);
-  private readonly coursesService = inject(CoursesService);
-  private readonly destroyRef = inject(DestroyRef);
+  readonly coursesStore = inject(CoursesStore);
 
   displayedColumns: string[] = ['category', 'name', 'rate', 'author'];
   dataSource = new MatTableDataSource<CourseListItem>([]);
-  loading = signal(true);
 
-  themeOptions: string[] = [];
+  readonly themeOptions = computed(() => {
+    const courses = this.coursesStore.courses();
+    return [...new Set(courses.map((c) => c.theme))].sort();
+  });
   readonly languageOptions: string[] = ['Английский', 'Англ-рус'];
 
   searchFilterText = '';
@@ -41,18 +41,17 @@ export class MainPage implements OnInit {
   constructor() {
     this.dataSource.filterPredicate = (data: CourseListItem, filterStr: string) =>
       this.filterPredicate(data, filterStr);
+
+    // Обновляем dataSource при изменении списка курсов
+    effect(() => {
+      const courses = this.coursesStore.courses();
+      this.dataSource.data = courses;
+      this.applyFilters();
+    });
   }
 
   ngOnInit(): void {
-    this.coursesService.getCourses().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: (data) => {
-        this.dataSource.data = data;
-        this.themeOptions = [...new Set(data.map((c) => c.theme))].sort();
-        this.loading.set(false);
-        this.applyFilters();
-      },
-      error: () => this.loading.set(false),
-    });
+    this.coursesStore.loadCourses();
   }
 
   onSearchChange(v: string) {

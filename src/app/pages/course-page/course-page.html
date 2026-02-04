@@ -1,9 +1,9 @@
-@if (loading()) {
+@if (coursesStore.loading()) {
   <div class="loading-wrapper">
     <mat-spinner diameter="48"></mat-spinner>
     <p transloco="Загрузка курса..."></p>
   </div>
-} @else if (course(); as courseData) {
+} @else if (coursesStore.currentCourse(); as courseData) {
   <div class="course-container">
     <button mat-raised-button (click)="goBack()" class="back-button">
       ← <ng-container transloco="Назад к списку курсов"></ng-container>

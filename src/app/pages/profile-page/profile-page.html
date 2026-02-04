@@ -1,10 +1,10 @@
 <div class="profile-container">
-  @if (loading()) {
+  @if (profileStore.loading()) {
     <div class="loading-wrapper">
       <mat-spinner diameter="48"></mat-spinner>
       <p transloco="Загрузка профиля..."></p>
     </div>
-  } @else if (profile(); as profileData) {
+  } @else if (profileStore.profile(); as profileData) {
     <mat-card>
       <mat-card-header>
         <mat-card-title transloco="Личный кабинет"></mat-card-title>
@@ -23,7 +23,7 @@
             <span class="label" transloco="Роль"></span>:
             <mat-chip-set>
               <mat-chip [class.teacher-chip]="profileData.role === 'teacher'">
-                {{ getRoleLabel() }}
+                {{ roleLabel() }}
               </mat-chip>
             </mat-chip-set>
           </div>

@@ -1,9 +1,9 @@
-@if (loading()) {
+@if (coursesStore.loading()) {
   <div class="loading-wrapper">
     <mat-spinner diameter="48"></mat-spinner>
     <p transloco="Загрузка урока..."></p>
   </div>
-} @else if (lessonContent(); as content) {
+} @else if (coursesStore.currentLesson(); as content) {
   <div class="lesson-container">
     <mat-card>
       <mat-card-header>

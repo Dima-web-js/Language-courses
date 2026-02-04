@@ -5,8 +5,8 @@
     </mat-card-header>
     <mat-card-content>
       <form (submit)="onSubmit($event)" class="login-form">
-        @if (errorMessage()) {
-          <div class="error-banner">{{ errorMessage() }}</div>
+        @if (authStore.error()) {
+          <div class="error-banner">{{ authStore.error() }}</div>
         }
 
         <mat-form-field>
@@ -60,9 +60,9 @@
           mat-raised-button
           color="primary"
           type="submit"
-          [disabled]="loading()"
+          [disabled]="authStore.loading()"
         >
-          {{ (loading() ? 'Вход...' : 'Войти') | transloco }}
+          {{ (authStore.loading() ? 'Вход...' : 'Войти') | transloco }}
         </button>
       </form>
     </mat-card-content>

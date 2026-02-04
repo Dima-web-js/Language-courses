@@ -1,6 +1,6 @@
 <app-filters
   ngSkipHydration
-  [themeOptions]="themeOptions"
+  [themeOptions]="themeOptions()"
   [languageOptions]="languageOptions"
   [selectedTheme]="selectedTheme()"
   [selectedLevel]="selectedLevel()"
@@ -12,7 +12,7 @@
 ></app-filters> 
 
 <div class="container max-h-[75vh] overflow-auto">
-  @if (loading()) {
+  @if (coursesStore.loading()) {
     <div class="loading-wrapper">
       <mat-spinner diameter="48"></mat-spinner>
       <p transloco="Загрузка курсов..."></p>

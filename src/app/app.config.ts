@@ -9,6 +9,7 @@ import { authTokenInterceptor } from './shared/interceptors/auth-token.intercept
 import { cacheInterceptor } from './shared/interceptors/cache.interceptor';
 import { unauthorizedInterceptor } from './shared/interceptors/unauthorized.interceptor';
 import { TranslocoHttpLoader } from './transloco-loader';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 const LANG_STORAGE_KEY = 'app-lang';
 
@@ -28,28 +29,26 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([authTokenInterceptor, cacheInterceptor, unauthorizedInterceptor])
-    ),
+    provideHttpClient(withFetch(), withInterceptors([authTokenInterceptor, cacheInterceptor, unauthorizedInterceptor])),
     provideClientHydration(withEventReplay()),
     provideTransloco({
-      config: {
-        availableLangs: ['ru', 'en'],
-        defaultLang: 'ru',
-        reRenderOnLangChange: true,
-        prodMode: !isDevMode(),
-        missingHandler: {
-          useFallbackTranslation: true,
+        config: {
+            availableLangs: ['ru', 'en'],
+            defaultLang: 'ru',
+            reRenderOnLangChange: true,
+            prodMode: !isDevMode(),
+            missingHandler: {
+                useFallbackTranslation: true,
+            },
         },
-      },
-      loader: TranslocoHttpLoader,
+        loader: TranslocoHttpLoader,
     }),
     {
-      provide: APP_INITIALIZER,
-      useFactory: initLangFromStorage,
-      deps: [TranslocoService],
-      multi: true,
+        provide: APP_INITIALIZER,
+        useFactory: initLangFromStorage,
+        deps: [TranslocoService],
+        multi: true,
     },
-  ],
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+],
 };

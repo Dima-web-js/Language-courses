@@ -1,14 +1,10 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  DestroyRef,
   signal,
   inject,
+  effect,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { finalize } from 'rxjs';
 import { form, FormField, required, email } from '@angular/forms/signals';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,8 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { TranslocoModule } from '@jsverse/transloco';
-import { AuthService } from '../../shared/services/auth.service';
 import { LoginFormData } from '../../shared/interfaces/login-form.model';
+import { AuthStore } from '../../shared/store/auth.store';
 
 
 @Component({
@@ -36,9 +32,7 @@ import { LoginFormData } from '../../shared/interfaces/login-form.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPage {
-  private readonly router = inject(Router);
-  private readonly authService = inject(AuthService);
-  private readonly destroyRef = inject(DestroyRef);
+  readonly authStore = inject(AuthStore);
 
   readonly loginModel = signal<LoginFormData>({
     email: '',
@@ -51,40 +45,30 @@ export class LoginPage {
     required(schemaPath.password, { message: 'Пароль обязателен' });
   });
 
-  readonly errorMessage = signal<string | null>(null);
-  readonly loading = signal(false);
   readonly passwordVisible = signal(false);
+
+  constructor() {
+    // Следим за ошибками из store
+    effect(() => {
+      const error = this.authStore.error();
+      if (error) {
+        // Очищаем ошибку через некоторое время
+        setTimeout(() => this.authStore.clearError(), 5000);
+      }
+    });
+  }
 
   togglePasswordVisibility(): void {
     this.passwordVisible.update((v) => !v);
   }
 
   clearErrorOnFieldTouch(): void {
-    this.errorMessage.set(null);
+    this.authStore.clearError();
   }
 
   onSubmit(event: Event): void {
-    // тут нужно, иначе форма будет перезагружаться. в реактивных и template-driv формах работало автоматически
-    // для этого же выше входной ивент и в шаблоне ивент
     event.preventDefault();
-    this.errorMessage.set(null);
-    
-    this.loading.set(true);
-    this.authService
-      .login(this.loginModel())
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        finalize(() => this.loading.set(false))
-      )
-      .subscribe({
-        next: () => this.router.navigate(['/platform/list-of-courses']),
-        error: (err: HttpErrorResponse) => {
-          if (err.status === 401) {
-            this.errorMessage.set('Неверный email или пароль');
-          } else {
-            this.errorMessage.set('Ошибка при входе. Попробуйте позже.');
-          }
-        },
-      });
+    this.authStore.clearError();
+    this.authStore.login(this.loginModel());
   }
 }
