@@ -8,7 +8,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { LoginFormData } from '../interfaces/login-form.model';
 import { Router } from '@angular/router';
@@ -62,7 +62,7 @@ export const AuthStore = signalStore(
         tap(() => patchState(store, { loading: true, error: null })),
         switchMap((credentials) =>
           authService.login(credentials).pipe(
-            map((response) => {
+            tap((response) => {
               patchState(store, {
                 accessToken: response.access_token,
                 email: response.email,
@@ -77,7 +77,7 @@ export const AuthStore = signalStore(
                 loading: false,
                 error: error.message || 'Ошибка входа',
               });
-              return of(null);
+              return EMPTY;
             })
           )
         )
