@@ -85,8 +85,9 @@ export const AuthStore = signalStore(
     ),
 
     logout(): void {
-      authService.logout();
       patchState(store, initialState);
+      authService.logout();
+      
     },
 
     clearError(): void {

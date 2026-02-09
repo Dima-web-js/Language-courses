@@ -10,6 +10,8 @@ import { cacheInterceptor } from './shared/interceptors/cache.interceptor';
 import { unauthorizedInterceptor } from './shared/interceptors/unauthorized.interceptor';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 const LANG_STORAGE_KEY = 'app-lang';
 
@@ -49,6 +51,8 @@ export const appConfig: ApplicationConfig = {
         deps: [TranslocoService],
         multi: true,
     },
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideStore(),
+    provideEffects()
 ],
 };
