@@ -38,6 +38,8 @@ testem.log
 /typings
 __screenshots__/
 
+**/auth-test.spec.ts
+
 # System files
 .DS_Store
 Thumbs.db
