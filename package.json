@@ -37,10 +37,10 @@
     "@angular/ssr": "^21.0.2",
     "@jsverse/transloco": "^8.2.1",
     "@ngrx/signals": "^21.0.1",
+    "@ngrx/store-devtools": "^21.0.1",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "@ngrx/store-devtools": "^21.0.1"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^21.0.2",
@@ -52,7 +52,11 @@
     "@tailwindcss/postcss": "^4.1.12",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
-    "jsdom": "^27.1.0",
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "@vitest/ui": "^4.1.0",
+    "jsdom": "^27.4.0",
+    "playwright": "^1.58.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
