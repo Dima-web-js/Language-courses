@@ -1,0 +1,403 @@
+:host {
+  display: block;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 68px 0 58px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  color: #5a655b;
+  letter-spacing: 0.5px;
+}
+
+.eyebrow span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #52764d;
+}
+
+em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: #49664d;
+}
+
+.copy a {
+  height: 52px;
+  padding: 0 26px;
+  background: #294c3b;
+  color: white;
+  border-radius: 8px;
+}
+
+.note {
+  font-size: 12px;
+  color: #74796d;
+  margin-top: 18px;
+}
+
+.visual {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 530px;
+  border-radius: 140px 140px 20px 20px;
+  background: #dce6d3;
+  display: flex;
+  flex-direction: column;
+  padding: 34px;
+  box-sizing: border-box;
+}
+
+.visual-top,
+.visual-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  z-index: 1;
+}
+
+.visual-top {
+  margin: 10px 15px;
+}
+
+.big-type {
+  font-family: Georgia, serif;
+  font-size: clamp(70px, 8vw, 118px);
+  line-height: 0.96;
+  letter-spacing: -6px;
+  color: #294c3b;
+  transform: rotate(-9deg);
+  margin: 65px 0 38px 12px;
+  z-index: 1;
+}
+
+.big-type i {
+  font-weight: 400;
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid #bacbb1;
+  border-radius: 50%;
+  width: 530px;
+  height: 260px;
+  transform: rotate(-40deg);
+  top: 150px;
+  left: -55px;
+  z-index: -1;
+}
+
+.orbit-two {
+  transform: rotate(45deg);
+}
+
+.ticket {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: #fffcf3;
+  padding: 19px;
+  border-radius: 10px;
+  transform: rotate(5deg);
+  box-shadow: 0 12px 25px #294c3b12;
+  z-index: 1;
+}
+
+.ticket small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1.3px;
+  margin-bottom: 6px;
+}
+
+.ticket strong {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.ticket > span {
+  margin-left: auto;
+}
+
+.visual-bottom {
+  margin-top: auto;
+  padding-top: 36px;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+
+.facts {
+  border-top: 1px solid #dcded4;
+  border-bottom: 1px solid #dcded4;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 30px 0;
+  gap: 20px;
+}
+
+.facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.facts strong {
+  font-weight: 500;
+  font-size: 23px;
+  letter-spacing: -0.6px;
+}
+
+.facts span {
+  color: #72766d;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    gap: 28px;
+    padding-top: 40px;
+  }
+
+  .visual {
+    min-height: 460px;
+    padding: 24px;
+  }
+
+  .big-type {
+    margin-left: 0;
+  }
+
+  .facts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    min-height: 460px;
+    max-width: 440px;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .big-type {
+    font-size: 100px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+  }
+
+  .facts strong {
+    font-size: 20px;
+  }
+}
+
+.teacher-name {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.teacher-name span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #72766d;
+}
+
+.portrait {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  width: 90%;
+  justify-self: center;
+  border-radius: 140px 140px 20px 20px;
+  background: #dce6d3;
+  aspect-ratio: 4/5;
+  align-self: center;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.portrait:after {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, #10231ee8);
+  pointer-events: none;
+}
+
+.portrait figcaption {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 24px;
+  color: #fffdf4;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.portrait figcaption > span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #d4e3bd;
+}
+
+.portrait strong {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.portrait small {
+  font-size: 12px;
+  color: #e0e5db;
+  line-height: 1.5;
+}
+
+@media (min-width: 601px) and (max-width: 800px) {
+  .portrait {
+    aspect-ratio: 3/5;
+    border-radius: 100px 100px 20px 20px;
+  }
+
+  .portrait figcaption {
+    left: 20px;
+    bottom: 24px;
+  }
+
+  .portrait strong {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .portrait {
+    max-width: 396px;
+    width: 90%;
+    justify-self: center;
+  }
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  color: #49664d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.benefits li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.benefits mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 400px) {
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+}
+
+.copy a {
+  max-width: 100%;
+  height: auto;
+  min-height: 52px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: normal;
+}
+
+.teacher-name {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #72766d;
+  margin: 22px 0 0;
+}
+
+h1 {
+  font-size: clamp(40px, 4.8vw, 66px);
+  font-weight: 500;
+  letter-spacing: -2.5px;
+  line-height: 1.08;
+  margin: 28px 0 28px 0;
+}
+
+.intro {
+  max-width: 400px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #64675f;
+  margin-bottom: 28px;
+}
+
+.copy {
+  align-self: center;
+}
+
+.copy > :first-child {
+  margin-top: 0;
+}
+
+.copy > :last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 601px) {
+  .copy {
+    padding-block: 42px;
+  }
+
+  .portrait {
+    align-self: stretch;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+
+  .portrait img {
+    position: absolute;
+    inset: 0;
+  }
+}

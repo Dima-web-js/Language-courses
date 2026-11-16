@@ -1,0 +1,15 @@
+<section aria-labelledby="contacts-title">
+      <div><p class="eyebrow">04 / НА СВЯЗИ</p>
+<h2 id="contacts-title">Ваш английский<br><em>начинается с «Hello! 😊».</em></h2>
+        <p class="intro">Напишите мне в соц сетях, задайте любые вопросы и начнём учиться!</p>
+        <a mat-flat-button href="https://t.me/dimaknight99" target="_blank" rel="noopener noreferrer">Написать в Telegram <mat-icon iconPositionEnd aria-hidden="true"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10" /></svg></mat-icon></a>
+      </div>
+      <address>
+        <a href="https://vk.ru/dm.knight" target="_blank" rel="noopener noreferrer"><mat-icon aria-hidden="true">people_outline</mat-icon><span><small>ВКОНТАКТЕ</small>dm.knight</span><mat-icon aria-hidden="true"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10" /></svg></mat-icon></a>
+        <a href="https://www.instagram.com/knightdima2939/" target="_blank" rel="noopener noreferrer"><mat-icon aria-hidden="true">photo_camera</mat-icon><span><small>INSTAGRAM</small>{{ instagram }}</span><mat-icon aria-hidden="true"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10" /></svg></mat-icon></a>
+        <a href="https://t.me/dimaknight99" target="_blank" rel="noopener noreferrer"><mat-icon aria-hidden="true">send</mat-icon><span><small>TELEGRAM</small>{{ telegram }}</span><mat-icon aria-hidden="true"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10" /></svg></mat-icon></a>
+        @for (email of emails; track email) {
+          <a [href]="'mailto:' + email"><mat-icon aria-hidden="true">mail_outline</mat-icon><span><small>ЭЛЕКТРОННАЯ ПОЧТА</small>{{ email }}</span><mat-icon aria-hidden="true"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10" /></svg></mat-icon></a>
+        }
+      </address>
+    </section>

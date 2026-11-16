@@ -1,0 +1,9 @@
+<section aria-labelledby="directions-title">
+  <header>
+    <div>
+      <p class="eyebrow">02 / ВАШ АНГЛИЙСКИЙ</p>
+      <h2 id="directions-title">Английский под <em>ваши</em> задачи</h2>
+    </div>
+  </header>
+  <div class="grid">@for (item of directions; track item.heading) {<app-direction-card [icon]="item.icon" [heading]="item.heading" [description]="item.description" [example]="item.example" />}</div></section>
+

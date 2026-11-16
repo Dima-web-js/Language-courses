@@ -1,0 +1,12 @@
+<section aria-labelledby="faq-title">
+  <div>
+    <p class="eyebrow">03 / ПЕРЕД СТАРТОМ</p>
+    <h2 id="faq-title">Давайте<br><em>проясним.</em></h2>
+  </div>
+  <mat-accordion>@for (item of questions; track item.title) 
+    {<mat-expansion-panel><mat-expansion-panel-header>
+      <mat-panel-title class="px-3">{{ item.title }}</mat-panel-title>
+    </mat-expansion-panel-header><p>{{ item.answer }}</p></mat-expansion-panel>}
+  </mat-accordion>
+
+</section>

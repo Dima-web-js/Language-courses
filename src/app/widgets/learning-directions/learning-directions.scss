@@ -1,0 +1,53 @@
+section {
+  padding: 0 0 90px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  color: #6b7466;
+  margin: 0 0 20px;
+}
+h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -1.8px;
+  font-weight: 500;
+  margin: 0;
+}
+em {
+  font-family: Georgia, serif;
+  color: #49664d;
+  font-weight: 400;
+}
+header > p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #70756b;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  header {
+    display: block;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  section {
+    padding-bottom: 60px;
+  }
+}

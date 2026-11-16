@@ -3,8 +3,13 @@ import { LoginPage } from './pages/login-page/login-page';
 import { authGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/landing-page/landing-page').then((m) => m.LandingPage),
+  },
   { path: 'login', component: LoginPage },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'platform',
     canActivate: [authGuard],
@@ -41,5 +46,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: '' },
 ];

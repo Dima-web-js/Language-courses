@@ -1,0 +1,122 @@
+:host {
+  display: block;
+  color: #28372c;
+  font-family: Roboto, Arial, sans-serif;
+}
+.landing {
+  background: #f8f7f1;
+  min-height: 100vh;
+}
+.wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  box-sizing: content-box;
+}
+.statement {
+  position: relative;
+  overflow: hidden;
+  background: #294c3b;
+  color: #fffdf4;
+  padding: 60px;
+  border-radius: 22px;
+}
+.statement > span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #cfdbbe;
+}
+.statement h2 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+  margin: 22px 0 16px;
+}
+.statement em {
+  font-family: Georgia, serif;
+  color: #d4e3bd;
+}
+.statement p {
+  position: relative;
+  z-index: 1;
+  line-height: 1.8;
+  font-size: 14px;
+  color: #cfdbcd;
+}
+.statement a {
+  margin-top: 16px;
+  background: #e5eccf !important;
+  color: #294c3b !important;
+  border-radius: 7px;
+  height: 48px;
+}
+.statement-decoration {
+  position: absolute;
+  right: 28px;
+  top: 25px;
+  font-size: 250px;
+  line-height: 1;
+  color: #44664f;
+  transform: rotate(-10deg);
+}
+.skip {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 10;
+  background: #294c3b;
+  color: white;
+  padding: 16px;
+}
+.skip:focus {
+  top: 10px;
+}
+app-teacher-about,
+app-learning-directions,
+app-learning-faq {
+  display: block;
+  scroll-margin-top: 30px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #8b9d63;
+  outline-offset: 5px;
+}
+@media (max-width: 800px) {
+  .wrap {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .statement {
+    padding: 35px 24px;
+  }
+  .statement-decoration {
+    font-size: 180px;
+    right: -20px;
+    top: 50px;
+    opacity: 0.55;
+  }
+  .statement p br {
+    display: none;
+  }
+}
+:host {
+  color-scheme: light;
+}
+.statement .statement-description {
+  max-width: 640px;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+.statement a {
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+}

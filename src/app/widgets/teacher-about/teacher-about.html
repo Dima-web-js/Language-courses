@@ -1,0 +1,31 @@
+<section aria-labelledby="about-title">
+  <div>
+    <p class="eyebrow" id="about-title">01 / ДАВАЙТЕ ЗНАКОМИТЬСЯ</p>
+    <div class="photo-collage photo-collage--intro">
+      <figure>
+        <img class="certificate" src="assets/img/hanze.jpg" alt="Документ об обучении в Hanze University of Applied Sciences" loading="lazy">
+      </figure>
+      <figure>
+        <img src="assets/img/Cute%20houses%20NL.JPG" alt="Дмитрий Кожухов у канала в Нидерландах" loading="lazy" width="960" height="1280">
+      </figure>
+    </div>
+  </div>
+  <div class="story">
+    <p>Я преподаватель английского с более чем <strong>7-летним опытом</strong>. Помогаю ученикам не просто изучать язык, а уверенно использовать его в повседневной жизни, работе и профессиональном общении.</p>
+    <ul>
+      <li><strong>Более 6 лет — премиум-преподаватель Skyeng</strong>, одной из крупнейших онлайн-школ английского языка в России.</li>
+      <li><strong>Международный опыт. </strong>Проживал в Нидерландах и проходил обучение в Hanze University of Applied Sciences (г. Гронинген).</li>
+      <li><strong>Высшее образование с отличием.</strong> Окончил НИУ «БелГУ» с красным дипломом.</li>
+      <li><strong>Английский на продвинутом уровне.</strong> Обладатель международного сертификата Cambridge English: Advanced (CAE) C2.</li>
+      <li><strong>Опыт преподавания профессионального английского.</strong> Работал с учениками из сфер IT, медицины, фармацевтики, искусства, спорта и других направлений.</li>
+      <li><strong>Помогаю ставить американский акцент.</strong></li>
+    </ul>
+  </div>
+  <div class="photo-collage">
+    @for (photo of photos; track photo.src) {
+      <figure>
+        <img [src]="photo.src" [alt]="photo.alt" [class.certificate]="photo.src === 'assets/img/CAE.png'" loading="lazy" width="960" height="1280">
+      </figure>
+    }
+  </div>
+</section>
