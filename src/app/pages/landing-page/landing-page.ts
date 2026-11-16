@@ -8,6 +8,7 @@ import { TeacherAbout } from '../../widgets/teacher-about/teacher-about';
 import { LearningDirections } from '../../widgets/learning-directions/learning-directions';
 import { LearningFaq } from '../../widgets/learning-faq/learning-faq';
 import { TeacherContacts } from '../../widgets/teacher-contacts/teacher-contacts';
+import { TeacherReviews } from '../../widgets/teacher-reviews/teacher-reviews';
 
 
 @Component({
@@ -20,7 +21,9 @@ import { TeacherContacts } from '../../widgets/teacher-contacts/teacher-contacts
     // LearningApproach, 
     LearningDirections, 
     LearningFaq, 
-    TeacherContacts
+    TeacherContacts,
+    TeacherReviews
+    
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './landing-page.html',

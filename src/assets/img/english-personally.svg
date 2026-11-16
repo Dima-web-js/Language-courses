@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="42" viewBox="0 0 150 42" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">English, personally.</title>
+  <circle cx="21" cy="21" r="21" fill="#294c3b"/>
+  <text x="22" y="30" fill="#f8f7f1" font-family="Georgia, serif" font-size="33" font-weight="400" text-anchor="middle">e.</text>
+  <g fill="#28372c" font-family="Roboto, Arial, sans-serif" font-size="14" style="line-height: 1.15;">
+    <text x="55" y="17.8" font-weight="400">english,</text>
+    <text x="55" y="33.9" font-weight="550">personally.</text>
+  </g>
+</svg>

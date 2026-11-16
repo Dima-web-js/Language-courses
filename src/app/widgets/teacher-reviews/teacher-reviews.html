@@ -1,0 +1,12 @@
+<section aria-labelledby="reviews-title">
+  <p class="eyebrow">03 / ОПЫТ УЧЕНИКОВ</p>
+  <h2 id="reviews-title">Отзывы</h2>
+  <div class="reviews-grid">
+    @for (review of reviews; track review.src) {
+      <a class="review" [href]="review.src" target="_blank" rel="noopener noreferrer"
+        aria-label="Открыть отзыв в полном размере (в новой вкладке)">
+        <img [src]="review.src" [alt]="review.alt" loading="lazy" decoding="async" />
+      </a>
+    }
+  </div>
+</section>

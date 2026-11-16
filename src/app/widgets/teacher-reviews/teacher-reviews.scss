@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  scroll-margin-top: 30px;
+}
+
+section {
+  padding: 100px 0;
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  color: #6b7466;
+  font-size: 11px;
+  letter-spacing: 1.8px;
+}
+
+h2 {
+  margin: 0 0 32px;
+  color: #293d30;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 500;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  align-items: start;
+  gap: 24px;
+}
+
+.review {
+  display: block;
+  max-width: 560px;
+  padding: 12px;
+  background: #fffdf8;
+  border: 1px solid #e4e4d9;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px #294c3b12;
+}
+
+.review:focus-visible {
+  outline: 3px solid #8b9d63;
+  outline-offset: 5px;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+  section {
+    padding: 65px 0;
+  }
+}

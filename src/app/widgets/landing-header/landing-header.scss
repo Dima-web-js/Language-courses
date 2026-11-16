@@ -27,6 +27,13 @@ button:focus-visible {
   min-height: 84px;
   border-bottom: 1px solid #dcded4;
 }
+.brand-comparison {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  min-width: 0;
+}
 .brand {
   display: flex;
   align-items: center;
@@ -35,6 +42,11 @@ button:focus-visible {
   text-decoration: none;
   font-size: 14px;
   line-height: 1.15;
+}
+.brand img {
+  display: block;
+  width: 150px;
+  height: auto;
 }
 .brand strong {
   font-weight: 500;
@@ -75,6 +87,18 @@ nav a:hover {
 .menu {
   display: none;
 }
+@media (min-width: 1101px) {
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .brand {
+    justify-self: start;
+  }
+  nav {
+    grid-column: 2;
+  }
+}
 @media (max-width: 800px) {
   nav {
     gap: 16px;
@@ -101,6 +125,9 @@ nav a:hover {
   .brand {
     font-size: 12px;
   }
+  .brand img {
+    width: 125px;
+  }
   .brand-mark {
     width: 34px;
     height: 34px;
@@ -117,12 +144,6 @@ nav a:hover {
     display: flex;
   }
 }
-.enrollment-cta {
-  background: #294c3b !important;
-  color: #fffdf4 !important;
-  border-radius: 7px;
-  white-space: nowrap;
-}
 @media (max-width: 1100px) {
   .header {
     flex-wrap: wrap;
@@ -134,15 +155,5 @@ nav a:hover {
     order: 4;
     width: 100%;
     justify-content: center;
-  }
-  .enrollment-cta {
-    margin-left: auto;
-  }
-}
-@media (max-width: 600px) {
-  .enrollment-cta {
-    order: 5;
-    width: 100%;
-    margin-left: 0;
   }
 }
